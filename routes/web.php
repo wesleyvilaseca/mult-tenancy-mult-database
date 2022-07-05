@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/404', function () {
+    return abort('404');
+})->name('404');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
