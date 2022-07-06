@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CreateCompanyDatabase;
+use App\Listeners\CreateCompanyDatabase as ListenersCreateCompanyDatabase;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        CompanyCreated::class => [
+            ListenersCreateCompanyDatabase::class
+        ]
+
+
     ];
 
     /**

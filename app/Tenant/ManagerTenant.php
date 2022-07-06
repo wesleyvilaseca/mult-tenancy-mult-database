@@ -22,4 +22,9 @@ class ManagerTenant
 
         Schema::connection('tenant_mysql')->getConnection()->reconnect();
     }
+
+    public function domain_is_master()
+    {
+        return request()->getHost() == config('tenant.domain_master');
+    }
 }

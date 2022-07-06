@@ -20,12 +20,19 @@ class TenantMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
+        $manager =  app(ManagerTenant::class);
+
+        if ($manager->domain_is_master()) {
+            return $next($request);
+        }
+
         $company = $this->get_company($request->getHost());
 
         if (!$company && $request->url() != route('404')) {
             return redirect()->route('404');
-        } else if ($request->url() != route('404')) {
-            app(ManagerTenant::class)->setConnection($company);
+        } else if ($request->url() != route('404') && !$manager->domain_is_master()) {
+            $manager->setConnection($company);
         }
 
         return $next($request);
