@@ -22,7 +22,7 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-        $rand = Str::slug(Carbon::now());
+        $rand = str_replace('-', '', Str::slug(Carbon::now())) ;
         $company = $this->company->create(
             [
                 'api_key' => '4321',
@@ -38,7 +38,7 @@ class CompanyController extends Controller
             ]
         );
 
-        event( new CompanyCreated($company));
+        event(new CompanyCreated($company));
 
         dd($company);
     }

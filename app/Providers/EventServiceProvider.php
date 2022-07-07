@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\CreateCompanyDatabase;
-use App\Listeners\CreateCompanyDatabase as ListenersCreateCompanyDatabase;
+use App\Events\CompanyCreated;
+use App\Events\DatabaseCreated;
+use App\Listeners\CreateCompanyDatabase;
+use App\Listeners\RunMigrationsTenant;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,7 +24,11 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         CompanyCreated::class => [
-            ListenersCreateCompanyDatabase::class
+            CreateCompanyDatabase::class
+        ],
+
+        DatabaseCreated::class => [
+            RunMigrationsTenant::class
         ]
 
 

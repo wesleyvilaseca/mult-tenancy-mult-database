@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CompanyCreated
+class DatabaseCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -24,6 +24,7 @@ class CompanyCreated
      */
     public function __construct(Company $company)
     {
+        //
         $this->company = $company;
     }
 

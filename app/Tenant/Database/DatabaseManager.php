@@ -10,8 +10,6 @@ class DatabaseManager
 
     public function create_database(Company $company)
     {
-        DB::statement("
-        CREATE DATABASE {$company->db_database} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-        ");
+        return DB::statement("CREATE DATABASE {$company->db_database} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
     }
 }
